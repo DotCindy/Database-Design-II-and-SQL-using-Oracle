@@ -10,7 +10,7 @@ FROM    EMPLOYEES
 WHERE   DEPARTMENT_ID IN(20, 50, 70);
 
 /* 2) Write a query to display the tomorrow’s date in the following format:
-September 28th of year 2006  <-- this is the format for the date you display. Your result will 
+September 28th of year 2006  <- this is the format for the date you display. Your result will 
 depend on the day when you create this query.
 Label the column Tomorrow. */
 
