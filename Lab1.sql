@@ -15,7 +15,8 @@ SET pagesize 200
 -- 6) What command would show the structure of the LOCATIONS table.
 DESC LOCATIONS;
 
-/* 7) Create a query to display the output shown below. NOTE: unless you are using a fixed font like Courier New the output will be a little wavy looking
+/* 7) Create a query to display the output shown below. NOTE: unless you are using a fixed font like Courier 
+New the output will be a little wavy looking
 City#        City        Province with Country Code
 ------------------------------------------------------------------
 1000         Roma        IN THE IT
