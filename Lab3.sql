@@ -4,9 +4,7 @@ it is increased by 5%. Make sure the output is a whole number. Also add a column
 the old salary from the new salary and multiplies the difference by 12.
 Label that last column   Cost of Pay Increase */
 
-SELECT  LAST_NAME "Last Name",         
-SALARY "Salary",         
-SALARY*1.05 "Salary+5%",        
+SELECT  LAST_NAME "Last Name", SALARY "Salary", SALARY*1.05 "Salary+5%",        
 ROUND(((SALARY*1.05)-SALARY)*12) "Cost of Pay Increase"
 FROM    EMPLOYEES
 WHERE   DEPARTMENT_ID IN(20, 50, 70);
@@ -55,8 +53,8 @@ for those cities that start on S and have at least 8 characters in their name. I
 a province name assigned, then 
 put Province Unknown */
 
-SELECT CITY "City", COUNTRY_ID "Country Code", NVL(STATE_PROVINCE,
-'Province Unknown') "State/Province Name"
+SELECT CITY "City", COUNTRY_ID "Country Code", 
+NVL(STATE_PROVINCE,'Province Unknown') "State/Province Name"
 FROM LOCATIONS
 WHERE CITY LIKE 'S%_______';
 
@@ -66,7 +64,8 @@ Format the dates to appear in the format similar to
 Chan                      30-JUN-16 WEDNESDAY , July      the Fifth of year 2017 */
 
 SELECT LAST_NAME "Last Name", HIRE_DATE "Hire Date",
-TO_CHAR(NEXT_DAY((HIRE_DATE+365), 'WEDNESDAY'), ('DAY "," Month "the" Ddspth "of year" YYYY')) "Salary Review Date"
+TO_CHAR(NEXT_DAY((HIRE_DATE+365), 'WEDNESDAY'), 
+('DAY "," Month "the" Ddspth "of year" YYYY')) "Salary Review Date"
 FROM EMPLOYEES
 WHERE HIRE_DATE >= '01-JAN-16';
 
