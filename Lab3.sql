@@ -69,3 +69,5 @@ SELECT LAST_NAME "Last Name", HIRE_DATE "Hire Date",
 TO_CHAR(NEXT_DAY((HIRE_DATE+365), 'WEDNESDAY'), ('DAY "," Month "the" Ddspth "of year" YYYY')) "Salary Review Date"
 FROM EMPLOYEES
 WHERE HIRE_DATE >= '01-JAN-16';
+
+                                                 
