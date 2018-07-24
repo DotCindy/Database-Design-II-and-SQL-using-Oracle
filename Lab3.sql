@@ -9,5 +9,5 @@ ROUND(((SALARY*1.05)-SALARY)*12) "Cost of Pay Increase"
 FROM    EMPLOYEES
 WHERE   DEPARTMENT_ID IN(20, 50, 70);
 
-SELECT TO_CHAR (SYSDATE+1, 'Mon DD"th of year" YYYY') AS "Tomorrow"
+SELECT TO_CHAR(SYSDATE+1, 'Mon DD"th of year" YYYY') "Tomorrow"
 FROM DUAL;
