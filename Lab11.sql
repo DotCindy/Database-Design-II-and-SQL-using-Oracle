@@ -42,3 +42,35 @@ SELECT STREET_ADDRESS, POSTAL_CODE, CITY, STATE_PROVINCE
 FROM CITIES
 WHERE UPPER(COUNTRY_ID) LIKE 'CA';
 
+/* 7) Modify your simple view so that will have following aliases instead of original column 
+names: Str_Adr, P_Code, City and Prov and also will include cities from ITALY as well. Then 
+display all data from this view. */
+CREATE OR REPLACE VIEW CAN_CITY_VU (Str_Adr, P_Code, City, Prov) AS
+SELECT STREET_ADDRESS, POSTAL_CODE, CITY, STATE_PROVINCE
+FROM CITIES
+WHERE UPPER(COUNTRY_ID) IN ('CA', 'IT');
+
+/* 8) Create complex view called CITY_DNAME_VU, based on tables LOCATIONS and DEPARTMENTS, so 
+that  will contain only columns Department_Name, City and State_Province for locations in ITALY 
+or CANADA. Include situations even when city does NOT have department established yet. Then 
+display all data from this view. */
+CREATE VIEW CITY_DNAME_VU AS
+SELECT DEPARTMENT_NAME, CITY, STATE_PROVINCE
+FROM LOCATIONS, DEPARTMENTS
+WHERE UPPER(COUNTRY_ID) IN ('CA', 'IT') OR (DEPARTMENT_ID IS NULL);
+
+/* 9) Modify your complex view so that will have following aliases instead of original column 
+names: DName, City and Prov and also will include all cities outside United States
+Include situations even when city does NOT have department established yet. Then display all data 
+from this view. */
+CREATE OR REPLACE VIEW CAN_CITY_VU (DName, City, Prov) AS
+SELECT DISTINCT STREET_ADDRESS, CITY, STATE_PROVINCE
+FROM LOCATIONS, DEPARTMENTS
+WHERE UPPER(COUNTRY_ID) NOT LIKE 'US' OR (DEPARTMENT_ID IS NULL);
+
+/* 10) Check in the Data Dictionary what Views (their names and definitions) are created so far in 
+your account. Then drop your CITY_DNAME_VU and check Data Dictionary again. What is different? */
+SELECT VIEW_NAME
+FROM USER_VIEWS;
+
+DROP VIEW CITY_DNAME_VU;
