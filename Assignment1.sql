@@ -182,3 +182,94 @@ AND SUBSTR(ORDER_DT,8) = '2015';
 12-Feb-2015            2
 01-Apr-2015            2
 11 rows selected. */
+	
+/* 6) The Sales Manager would like to see all orders in 2014 from United Kingdom and Canada.
+Show the customer number, customer name and country name */
+-- SQL:
+SELECT CUST_NO,
+       CNAME,
+       COUNTRY_NAME
+FROM CUSTOMERS
+LEFT JOIN COUNTRIES
+ON (COUNTRY_ID = COUNTRY_CD)
+LEFT JOIN ORDERS
+USING (CUST_NO)
+WHERE (COUNTRY_NAME IN ('United Kingdom', 'Canada')) AND
+      (SUBSTR(ORDER_DT,8) = '2014');
+
+-- OUTPUT:
+/*   CUST_NO CNAME                          COUNTRY_NAME                            
+---------- ------------------------------ ----------------------------------------
+      1065 Trees to Seas Ltd              United Kingdom                          
+      1042 Vacation Central 4             Canada                                  
+      1129 Fresh Air Co 3                 United Kingdom                          
+      1025 Fresh Air Co 5                 United Kingdom                          
+      1127 Fresh Air Co 1                 United Kingdom                          
+      1048 Supras Camping Supplies 5      Canada                                  
+      1048 Supras Camping Supplies 5      Canada                                  
+      1128 Fresh Air Co 2                 United Kingdom                          
+      1048 Supras Camping Supplies 5      Canada                                  
+      1132 Excellence en Montagne         Canada                                  
+      1111 Wally Mart 1                   United Kingdom                          
+      1069 Andes Camping Supplies 3       Canada                                  
+      1065 Trees to Seas Ltd              United Kingdom                          
+      1129 Fresh Air Co 3                 United Kingdom                          
+      1033 Supras Camping Suplies 3       Canada                                  
+      1067 Andes Camping Supplies 1       Canada                                  
+      1128 Fresh Air Co 2                 United Kingdom                          
+      1069 Andes Camping Supplies 3       Canada                                  
+      1128 Fresh Air Co 2                 United Kingdom                          
+      1067 Andes Camping Supplies 1       Canada                                  
+      1042 Vacation Central 4             Canada                                  
+      1092 Clear Valley Waters 2          Canada                                  
+      1092 Clear Valley Waters 2          Canada                                  
+23 rows selected. */
+			
+/* 7) The President wants to know out of the 150 customers on file, how many customers have not 
+placed an order? */
+-- SQL:
+SELECT COUNT(CUST_NO) AS "No Order Customers"
+FROM CUSTOMERS 
+LEFT JOIN ORDERS 
+USING (CUST_NO)
+WHERE ORDER_NO IS NULL;
+			
+-- OUTPUT:
+/* No Order Customers
+------------------
+                47 */
+
+/* 8) Show what customers (number and name) along with the country name for all customers that 
+are in the same countries as the Supra customers. Limit the list to any customer that starts with 
+the letters A or B. */
+-- SQL:
+SELECT CUST_NO, 
+       CNAME, 
+       COUNTRY_NAME
+FROM CUSTOMERS 
+LEFT JOIN COUNTRIES
+ON (COUNTRY_ID = COUNTRY_CD)
+WHERE ((CNAME LIKE 'A%') OR 
+      (CNAME LIKE 'B%')) AND
+       (COUNTRY_CD IN(SELECT COUNTRY_CD 
+                     FROM CUSTOMERS 
+                     WHERE CNAME LIKE '%Supra%'));
+
+-- OUTPUT:
+/*   CUST_NO CNAME                          COUNTRY_NAME                            
+---------- ------------------------------ ----------------------------------------
+      1086 All season camping goods       United States of America                
+      1078 Act'N'Up Fitness 4             United States of America                
+      1077 Act'N'Up Fitness 3             United States of America                
+      1076 Act'N'Up Fitness 2             United States of America                
+      1075 Act'N'Up Fitness 1             United States of America                
+      1072 Advanced Climbing Ltd          United States of America                
+      1012 Act'N'Up Fitness 5             United States of America                
+      1133 Back woods up front Ltd.       Canada                                  
+      1070 Andes Camping Supplies 4       Canada                                  
+      1069 Andes Camping Supplies 3       Canada                                  
+      1068 Andes Camping Supplies 2       Canada                                  
+      1067 Andes Camping Supplies 1       Canada                                  
+      1010 Andes Camping Supplies 6       Canada                                  
+      1006 Bergsteiger G.m.b.H.           Germany                                 
+14 rows selected.  */
