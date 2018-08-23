@@ -115,3 +115,6 @@ JOIN SECTION
         
 -- 15) What is the SELECT command to issue to see if in 2 months time this view still exists.
 SELECT * FROM "WhsSec_Man_view";
+
+-- 16) If you want to modify the view what is the first line of the command
+CREATE OR REPLACE VIEW "WhsSec_Man_view" (
